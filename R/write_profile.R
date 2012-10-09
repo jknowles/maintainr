@@ -1,0 +1,18 @@
+
+dir.create('tmp')
+sink('tmp/.Rprofile')
+cat(".First<-function(){")
+cat("\n")
+cat("library(ggplot2)")
+cat("\n")
+cat("}")
+cat("\n")
+cat(".Last<-function(){")
+cat("\n")
+cat("cat('\n Goodbye at ',date(),'\n')")
+cat("\n")
+cat("}")
+cat("\n")
+sink()
+
+file.show("tmp/.Rprofile")

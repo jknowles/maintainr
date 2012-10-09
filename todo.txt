@@ -1,0 +1,6 @@
+TODO:
+
+* Sync R Profile Site
+* Sync libraries
+* Update libraries
+* Set R Profile Site configuration

@@ -1,0 +1,6 @@
+.Rproj.user
+.Rhistory
+.RData
+*.Rproj
+setup.R
+tmp
