@@ -4,3 +4,4 @@ TODO:
 * Sync libraries
 * Update libraries
 * Set R Profile Site configuration
+* Get list of libraries
