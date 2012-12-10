@@ -1,7 +1,11 @@
 TODO:
 
 * Sync R Profile Site
-* Sync libraries
+* Make Renviron point to library independently
+* Make setting the R library path independent
+* Allow R to create the path specified if the file does not exist
+* Prompt user to confirm path creation
 * Update libraries
 * Set R Profile Site configuration
 * Get list of libraries
+* Write documentation files to make package installable

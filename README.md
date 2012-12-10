@@ -33,5 +33,5 @@ set_library()
 
 ```
 
-
+Once this is done, when R is restarted, the new library will be the default library. Cleaning out old libraries will need to be handled by a separate function yet to be written. 
 

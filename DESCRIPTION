@@ -1,0 +1,11 @@
+Package: maintainr
+Type: Package
+Title: Managing R Packages and Libraries
+Version: 0.1
+Date: 12-10-2012
+Author: Jared E. Knowles
+Maintainer: Jared E. Knowles <jknowles@gmail.com>
+Description: Tools for managing and synchronizing R installs across devices and platforms.
+License: GPL-3
+Depends: R (>= 2.15.1)
+Suggests: devtools
