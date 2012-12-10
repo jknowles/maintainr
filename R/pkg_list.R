@@ -1,38 +1,18 @@
-a<-library()
-a<-a$results
-mypkgs<-a[,1]
 
-mylibs<-a[,2]
-
-print(update.packages)
-
-get_mylibraries<-function(){
+save_pkgs<-function(path){
   a<-library()$results
-  cat("The following libraries are available on your machine: \n")
-  return(unique(a[,2]))
+  write.csv(a[,1:2],file=paste0(path,"/pkglist.csv"),row.names=FALSE)
 }
 
-get_mypackages<-function(){
-  a<-library()$results
-  print("The following packages are installed on your machine:")
-  return(a[,1])
+read_pkgs<-function(path){
+  read.csv(file=paste0(path,"/pkglist.csv"),stringsAsFactors=FALSE)
 }
 
-save_pkgs<-function(){
-  a<-library()$results
-  write.csv(a[,1:2],file="tmp/pkglist.csv",row.names=FALSE)
+install_pkgs<-function(mypkgs,newlib){
+  install.packages(mypkgs[,1],lib=newlib)
 }
 
-read_pkgs<-function(){
-  # Get list from dropbox
+
+add_new_lib<-function(newlib){
+  .libPaths(c(.libPaths(),newlib))
 }
-
-a<-read.csv(file="tmp/pkglist.csv")
-
-install_pkgs<-function(a){
-  b<-library()$results
-  
-  
-  
-}
-
