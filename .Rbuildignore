@@ -3,3 +3,5 @@ README.*
 figure
 .Rhistory
 .gitignore
+^.*\.Rproj$
+^\.Rproj\.user$
