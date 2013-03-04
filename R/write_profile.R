@@ -1,10 +1,11 @@
-#mylist<-c("ggplot2","eeptools","plyr")
-
-write.profile<-function(pkglist,...){
-  #dir.create('tmp')
-#   catf <- function(..., file="tmp/.Rprofile", append=TRUE){
-#     cat(..., file=file, append=append)
-#   }
+##' Write a new .Rprofile
+##'
+##' Export a custom .Rprofile for syncing between installs.
+##' 
+##' @param pkglist A pkglist produced by \code{\link{save_pkgs}}
+##' @seealso \url{http://stackoverflow.com/questions/1401904/painless-way-to-install-a-new-version-of-r-on-windows}
+write.profile<-function(pkglist){
+  dir.create("tmp")
   sink('tmp/.Rprofile',append=TRUE)
   cat(".First<-function(){")
   cat("\n")
@@ -23,32 +24,3 @@ write.profile<-function(pkglist,...){
   sink()
 }
 
-# write.profile(mylist)
-# 
-# dir.create('tmp')
-# sink('tmp/.Rprofile')
-# cat(".First<-function(){")
-# cat("\n")
-# cat("library(ggplot2)")
-# cat("\n")
-# cat("}")
-# cat("\n")
-# cat(".Last<-function(){")
-# cat("\n")
-# cat("cat('\n Goodbye at ',date(),'\n')")
-# cat("\n")
-# cat("}")
-# cat("\n")
-# sink()
-# 
-# file.show("tmp/.Rprofile")
-# 
-# readLines(con="tmp/.Rprofile",n=1)
-# 
-# 
-# .Last <- function(){
-#   pkgs <- installed.packages()[,1]
-#   if (length(pkgs) > length(installed)){
-#     save(pkgs,file="G:\Setinfo\R\packagelist.RData")
-#   }
-# }

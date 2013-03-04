@@ -5,3 +5,7 @@ figure
 .gitignore
 ^.*\.Rproj$
 ^\.Rproj\.user$
+workflow.R
+tmp
+todo.txt
+roxygen.R

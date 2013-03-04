@@ -27,7 +27,7 @@ read_pkgs<-function(path){
 ##' Read package names from a CSV file to an R object.
 ##'
 ##' @param mypkgs An R vector of package names, ideally read in from \code{read_pkgs}
-##' @param newLib A path to a valid directory where R can install the packages
+##' @param newlib A path to a valid directory where R can install the packages
 ##' @export
 install_pkgs<-function(mypkgs,newlib){
   install.packages(mypkgs[,1],lib=newlib)
@@ -35,9 +35,36 @@ install_pkgs<-function(mypkgs,newlib){
 
 ##' Add a new library
 ##'
-##' Tell R where to find new packages in a new library in the current session.
+##' Add the new library to the R .libPaths() list. 
 ##'
-##' @param newLib A path to a valid directory where R has installed packages
+##' @param newlib A path to a valid directory where R has installed packages
 add_new_lib<-function(newlib){
   .libPaths(c(.libPaths(),newlib))
+}
+
+##' Set the library
+##'
+##' Tell R where to find new packages in a new library in the current session.
+##' @author Tal Galili
+##' @seealso \url{http://www.r-statistics.com/2010/04/changing-your-r-upgrading-strategy-and-the-r-code-to-do-it-on-windows/}
+set_library <- function(){
+  if(grepl("/", R.home(), fixed = T))
+  { R_parent_lib <- paste(head(strsplit(R.home(), "/", fixed = T)[[1]], -1), collapse = "/") }
+  if(grepl("\\", R.home(), fixed = T))
+  { R_parent_lib <- paste(head(strsplit(R.home(), "\\", fixed = T)[[1]], -1), collapse = "/") }
+  # if global.library.folder isn't defined, then we assume it is of the form: "C:\\Program Files\\R\\library"
+  #R_parent_lib <- paste(head(strsplit(R.home(), "/", fixed = T)[[1]], -1), collapse = "/")
+  global.library.folder <- paste(R_parent_lib, "/lib", sep = "")
+  
+  Renviron.site.loc <- paste(R.home(), "\\etc\\Renviron.site", sep = "")
+  if(!file.exists(Renviron.site.loc))
+  {  # If "Renviron.site" doesn't exist (which it shouldn't be) - create it and add the global lib line to it.
+    cat(paste("R_LIBS='",global.library.folder, "'\n",sep = "") ,
+        file = Renviron.site.loc)				 
+    cat(paste("The file:" , Renviron.site.loc, "didn't exist - we created it and added your 'Global library link' (",global.library.folder,") to it.\n"))
+  } else {
+    cat(paste("The file:" , Renviron.site.loc, "existed and we could NOT add some lines!  make sure you add the following line by yourself:","\n"))
+    cat(paste("R_LIBS=",global.library.folder,"\n", sep = "") )
+    cat(paste("To the file:",Renviron.site.loc,"\n"))
+  }
 }

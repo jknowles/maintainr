@@ -8,7 +8,7 @@
   \item{mypkgs}{An R vector of package names, ideally read
   in from \code{read_pkgs}}
 
-  \item{newLib}{A path to a valid directory where R can
+  \item{newlib}{A path to a valid directory where R can
   install the packages}
 }
 \description{

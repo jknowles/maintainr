@@ -5,11 +5,10 @@
   add_new_lib(newlib)
 }
 \arguments{
-  \item{newLib}{A path to a valid directory where R has
+  \item{newlib}{A path to a valid directory where R has
   installed packages}
 }
 \description{
-  Tell R where to find new packages in a new library in the
-  current session.
+  Add the new library to the R .libPaths() list.
 }
 
