@@ -1,8 +1,8 @@
-\name{set_library}
-\alias{set_library}
+\name{setLibrary}
+\alias{setLibrary}
 \title{Set the library}
 \usage{
-  set_library()
+  setLibrary()
 }
 \description{
   Tell R where to find new packages in a new library in the

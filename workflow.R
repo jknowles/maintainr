@@ -6,16 +6,16 @@
 
 droppath<-"C:/Users/Jared/Dropbox/Apps/maintainr"
 
-newLib<-"C:/R/lib"
+newlib<-"C:/R/lib"
 
-save_pkgs<-function(path){
+savePkgs<-function(path){
   a<-library()$results
   write.csv(a[,1:2],file=paste0(path,"/pkglist.csv"),row.names=FALSE)
 }
 
-save_pkgs(droppath)
+savePkgs(droppath)
 
-read_pkgs<-function(path){
+readPkgs<-function(path){
   read.csv(file=paste0(path,"/pkglist.csv"),stringsAsFactors=FALSE)
 }
 

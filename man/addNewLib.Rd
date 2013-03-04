@@ -1,8 +1,8 @@
-\name{add_new_lib}
-\alias{add_new_lib}
+\name{addNewLib}
+\alias{addNewLib}
 \title{Add a new library}
 \usage{
-  add_new_lib(newlib)
+  addNewLib(newlib)
 }
 \arguments{
   \item{newlib}{A path to a valid directory where R has

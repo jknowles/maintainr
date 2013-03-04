@@ -1,8 +1,8 @@
-\name{write.profile}
-\alias{write.profile}
+\name{writeProfile}
+\alias{writeProfile}
 \title{Write a new .Rprofile}
 \usage{
-  write.profile(pkglist)
+  writeProfile(pkglist)
 }
 \arguments{
   \item{pkglist}{A pkglist produced by

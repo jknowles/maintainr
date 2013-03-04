@@ -4,7 +4,7 @@
 ##' 
 ##' @param pkglist A pkglist produced by \code{\link{save_pkgs}}
 ##' @seealso \url{http://stackoverflow.com/questions/1401904/painless-way-to-install-a-new-version-of-r-on-windows}
-write.profile<-function(pkglist){
+writeProfile<-function(pkglist){
   dir.create("tmp")
   sink('tmp/.Rprofile',append=TRUE)
   cat(".First<-function(){")

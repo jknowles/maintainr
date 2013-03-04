@@ -4,10 +4,11 @@
 ##'
 ##' @param path A string that lists a valid path for R to the place to export the list
 ##' of packages. Ideally to a remote backup solution.
+##' @param filename a name of a csv file to save the package list to
 ##' @export
-save_pkgs<-function(path){
+savePkgs <- function(path, filename){
   a<-library()$results
-  write.csv(a[,1:2],file=paste0(path,"/pkglist.csv"),row.names=FALSE)
+  write.csv(a[,1:2], file=paste0(path,"/", filename), row.names=FALSE)
 }
 
 
@@ -18,19 +19,21 @@ save_pkgs<-function(path){
 ##' @param path A string that lists a valid path for R to the place to import the list
 ##' of packages. Ideally to a remote backup solution.
 ##' @export
-read_pkgs<-function(path){
-  read.csv(file=paste0(path,"/pkglist.csv"),stringsAsFactors=FALSE)
+readPkgs <- function(path, filename){
+  read.csv(file=paste0(path,"/", filename), stringsAsFactors=FALSE)
 }
 
 ##' Restore Packages from a Backup
 ##'
 ##' Read package names from a CSV file to an R object.
 ##'
-##' @param mypkgs An R vector of package names, ideally read in from \code{read_pkgs}
+##' @param mypkgs An R vector of package names, ideally read in from \code{\link{read_pkgs}}
 ##' @param newlib A path to a valid directory where R can install the packages
 ##' @export
-install_pkgs<-function(mypkgs,newlib){
-  install.packages(mypkgs[,1],lib=newlib)
+installPkgs <- function(mypkgs, newlib){
+  update.packages(ask=FALSE)
+  list <- unique(mypkgs[, 1])
+  install.packages(list, lib = newlib)
 }
 
 ##' Add a new library
@@ -38,7 +41,7 @@ install_pkgs<-function(mypkgs,newlib){
 ##' Add the new library to the R .libPaths() list. 
 ##'
 ##' @param newlib A path to a valid directory where R has installed packages
-add_new_lib<-function(newlib){
+addNewLib<-function(newlib){
   .libPaths(c(.libPaths(),newlib))
 }
 
@@ -47,7 +50,7 @@ add_new_lib<-function(newlib){
 ##' Tell R where to find new packages in a new library in the current session.
 ##' @author Tal Galili
 ##' @seealso \url{http://www.r-statistics.com/2010/04/changing-your-r-upgrading-strategy-and-the-r-code-to-do-it-on-windows/}
-set_library <- function(){
+setLibrary <- function(){
   if(grepl("/", R.home(), fixed = T))
   { R_parent_lib <- paste(head(strsplit(R.home(), "/", fixed = T)[[1]], -1), collapse = "/") }
   if(grepl("\\", R.home(), fixed = T))

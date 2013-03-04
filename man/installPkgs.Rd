@@ -1,12 +1,12 @@
-\name{install_pkgs}
-\alias{install_pkgs}
+\name{installPkgs}
+\alias{installPkgs}
 \title{Restore Packages from a Backup}
 \usage{
-  install_pkgs(mypkgs, newlib)
+  installPkgs(mypkgs, newlib)
 }
 \arguments{
   \item{mypkgs}{An R vector of package names, ideally read
-  in from \code{read_pkgs}}
+  in from \code{\link{read_pkgs}}}
 
   \item{newlib}{A path to a valid directory where R can
   install the packages}

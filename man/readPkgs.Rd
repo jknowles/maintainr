@@ -1,8 +1,8 @@
-\name{read_pkgs}
-\alias{read_pkgs}
+\name{readPkgs}
+\alias{readPkgs}
 \title{Read Packages}
 \usage{
-  read_pkgs(path)
+  readPkgs(path, filename)
 }
 \arguments{
   \item{path}{A string that lists a valid path for R to the
