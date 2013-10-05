@@ -6,7 +6,10 @@
 }
 \arguments{
   \item{path}{A string that lists a valid path for R to the
-  place to import the list of packages. Ideally to a remote
+  place to import the list}
+
+  \item{filename}{A string that denotes the filename where
+  the packages are stored of packages. Ideally to a remote
   backup solution.}
 }
 \description{

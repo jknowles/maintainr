@@ -17,6 +17,7 @@ savePkgs <- function(path, filename){
 ##' Read package names from a CSV file to an R object.
 ##'
 ##' @param path A string that lists a valid path for R to the place to import the list
+##' @param filename A string that denotes the filename where the packages are stored
 ##' of packages. Ideally to a remote backup solution.
 ##' @export
 readPkgs <- function(path, filename){
@@ -27,7 +28,7 @@ readPkgs <- function(path, filename){
 ##'
 ##' Read package names from a CSV file to an R object.
 ##'
-##' @param mypkgs An R vector of package names, ideally read in from \code{\link{read_pkgs}}
+##' @param mypkgs An R vector of package names, ideally read in from \code{\link{readPkgs}}
 ##' @param newlib A path to a valid directory where R can install the packages
 ##' @export
 installPkgs <- function(mypkgs, newlib){

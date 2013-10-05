@@ -2,7 +2,7 @@
 ##'
 ##' Export a custom .Rprofile for syncing between installs.
 ##' 
-##' @param pkglist A pkglist produced by \code{\link{save_pkgs}}
+##' @param pkglist A pkglist produced by \code{\link{savePkgs}}
 ##' @seealso \url{http://stackoverflow.com/questions/1401904/painless-way-to-install-a-new-version-of-r-on-windows}
 writeProfile<-function(pkglist){
   dir.create("tmp")

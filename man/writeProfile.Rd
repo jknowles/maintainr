@@ -6,7 +6,7 @@
 }
 \arguments{
   \item{pkglist}{A pkglist produced by
-  \code{\link{save_pkgs}}}
+  \code{\link{savePkgs}}}
 }
 \description{
   Export a custom .Rprofile for syncing between installs.
