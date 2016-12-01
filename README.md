@@ -9,15 +9,19 @@ The basic workflow is simple, but the idea of the package is to create a way to 
 
 To install `maintainr`:
 
-    library(devtools)
-    install_github("jknowles/maintainr")
-    library(maintainr)
+``` r
+library(devtools)
+install_github("jknowles/maintainr")
+library(maintainr)
+```
 
 The first step is to get a csv file of installed packages (so it is human readable as well) with the function `save_pkgs()`.
 
-    # For example
-    PATH <- "Path/To/My/Dropbox"
-    savePkgs(PATH, "mypkglist.csv")
+``` r
+# For example
+PATH <- "Path/To/My/Dropbox"
+savePkgs(PATH, "mypkglist.csv")
+```
 
 After packages have been stored, then the user can restore the installed packages either to a new library (to create a sitewide library for example) or on a new machine, using the following workflow:
 
@@ -33,9 +37,43 @@ After packages have been stored, then the user can restore the installed package
 
 After we have installed the packages into a new library, we need to tell R how to find that library. For now, the options to do this are quite limited. The best way is to borrow the code from [Tal Galili](http://stackoverflow.com/questions/1401904/painless-way-to-install-a-new-version-of-r-on-windows) to create a new .Renviron file. Currently this function only allows for a library that is in the parent of the R home directory, but will be updated soon to fix this:
 
-    setLibrary()
+``` r
+setLibrary()
+```
 
 Once this is done, when R is restarted, the new library will be the default library. Cleaning out old libraries will need to be handled by a separate function yet to be written.
+
+Workflow
+--------
+
+### Backup
+
+``` r
+# Backup
+
+# User defines:
+pkgBackupPath <- "/path/to/my/"
+newlib <- "C:/R/lib"
+
+savePkgs(pkgBackupPath, filename='backup.csv')
+
+pkgList <- read_pkgs(pkgBackupPath, filename='backup.csv')
+head(pkgList)
+
+installPkgs(pkgList, newLib)
+
+# Remove old libs
+addNewLib(newLib)
+
+Sys.setenv("R_LIBS_SITE" = newLib)
+identical(Sys.getenv("R_LIBS_SITE"), newLib)
+```
+
+### Links that help
+
+[Upgrading R on Windows](http://www.r-statistics.com/wp-content/uploads/2010/04/upgrading-R-on-windows.r.txt)
+
+[Install New R on Windows](http://stackoverflow.com/questions/1401904/painless-way-to-install-a-new-version-of-r-on-windows)
 
 ### Contributing
 

@@ -2,7 +2,7 @@ Package: maintainr
 Type: Package
 Title: Managing R Packages and Libraries
 Version: 0.1
-Date: 12-10-2012
+Date: 12-10-2016
 Author: Jared E. Knowles
 Maintainer: Jared E. Knowles <jknowles@gmail.com>
 Description: Tools for managing and synchronizing R installs across devices and

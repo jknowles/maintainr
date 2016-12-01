@@ -4,12 +4,14 @@
 \alias{installPkgs}
 \title{Restore Packages from a Backup}
 \usage{
-installPkgs(mypkgs, newlib)
+installPkgs(mypkgs, newlib, update = FALSE)
 }
 \arguments{
 \item{mypkgs}{An R vector of package names, ideally read in from \code{\link{readPkgs}}}
 
 \item{newlib}{A path to a valid directory where R can install the packages}
+
+\item{update}{A logical, should packages be updated first? Default is false}
 }
 \description{
 Read package names from a CSV file to an R object.

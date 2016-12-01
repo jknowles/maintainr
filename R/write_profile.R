@@ -1,7 +1,7 @@
 ##' Write a new .Rprofile
 ##'
 ##' Export a custom .Rprofile for syncing between installs.
-##' 
+##'
 ##' @param pkglist A pkglist produced by \code{\link{savePkgs}}
 ##' @seealso \url{http://stackoverflow.com/questions/1401904/painless-way-to-install-a-new-version-of-r-on-windows}
 writeProfile<-function(pkglist){
@@ -10,9 +10,9 @@ writeProfile<-function(pkglist){
   cat(".First<-function(){")
   cat("\n")
   for(i in 1:length(pkglist)){
-  cat("library(",pkglist[i],")",sep="")
-  cat("\n")
-}
+    cat("library(",pkglist[i],")",sep="")
+    cat("\n")
+  }
   cat("}")
   cat("\n")
   cat(".Last<-function(){")

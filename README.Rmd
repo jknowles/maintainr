@@ -25,7 +25,7 @@ RProfile and Renviron file within R.
 
 To install `maintainr`: 
 
-```
+```{r eval=FALSE}
 library(devtools)
 install_github("jknowles/maintainr")
 library(maintainr)
@@ -33,7 +33,7 @@ library(maintainr)
 
 The first step is to get a csv file of installed packages (so it is human readable as well) with the function `save_pkgs()`. 
 
-```
+```{r eval=FALSE}
 # For example
 PATH <- "Path/To/My/Dropbox"
 savePkgs(PATH, "mypkglist.csv")
@@ -63,7 +63,7 @@ to create a new .Renviron file. Currently this function only allows for a
 library that is in the parent of the R home directory, but will be updated soon
 to fix this:
 
-```
+```{r eval=FALSE}
 setLibrary()
 
 ```
@@ -71,6 +71,40 @@ setLibrary()
 Once this is done, when R is restarted, the new library will be the default 
 library. Cleaning out old libraries will need to be handled by a separate 
 function yet to be written. 
+
+## Workflow
+
+
+### Backup
+
+```{r eval=FALSE}
+# Backup
+
+# User defines:
+pkgBackupPath <- "/path/to/my/"
+newlib <- "C:/R/lib"
+
+savePkgs(pkgBackupPath, filename='backup.csv')
+
+pkgList <- read_pkgs(pkgBackupPath, filename='backup.csv')
+head(pkgList)
+
+installPkgs(pkgList, newLib)
+
+# Remove old libs
+addNewLib(newLib)
+
+Sys.setenv("R_LIBS_SITE" = newLib)
+identical(Sys.getenv("R_LIBS_SITE"), newLib)
+
+```
+
+### Links that help
+
+[Upgrading R on Windows](http://www.r-statistics.com/wp-content/uploads/2010/04/upgrading-R-on-windows.r.txt)
+
+
+[Install New R on Windows](http://stackoverflow.com/questions/1401904/painless-way-to-install-a-new-version-of-r-on-windows)
 
 ### Contributing
 
