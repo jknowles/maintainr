@@ -9,3 +9,8 @@ workflow.R
 tmp
 todo.txt
 roxygen.R
+^README\.Rmd$
+^README-.*\.png$
+^\.travis\.yml$
+^codecov\.yml$
+^CONDUCT\.md$

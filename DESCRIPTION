@@ -7,11 +7,14 @@ Author: Jared E. Knowles
 Maintainer: Jared E. Knowles <jknowles@gmail.com>
 Description: Tools for managing and synchronizing R installs across devices and
     platforms.
-License: GPL-3
+License: MIT + file LICENSE
 Depends:
     R (>= 2.15.1)
 Suggests:
-    devtools
+    devtools,
+    testthat,
+    covr
 Collate:
     'pkg_list.R'
     'write_profile.R'
+RoxygenNote: 5.0.1
