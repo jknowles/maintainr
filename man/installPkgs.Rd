@@ -4,12 +4,12 @@
 \alias{installPkgs}
 \title{Restore Packages from a Backup}
 \usage{
-installPkgs(mypkgs, newlib, update = FALSE)
+installPkgs(mypkgs, libpath = NULL, update = FALSE)
 }
 \arguments{
 \item{mypkgs}{An R vector of package names, ideally read in from \code{\link{readPkgs}}}
 
-\item{newlib}{A path to a valid directory where R can install the packages}
+\item{libpath}{A path to a valid directory where R can install the packages}
 
 \item{update}{A logical, should packages be updated first? Default is false}
 }

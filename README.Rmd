@@ -2,8 +2,6 @@
 output: github_document
 ---
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-
 ```{r, echo = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
@@ -23,6 +21,8 @@ The basic workflow is simple, but the idea of the package is to create a way to
 allow lots of flexibility to users--such as composing and synchronizing an 
 RProfile and Renviron file within R. 
 
+## Installation
+
 To install `maintainr`: 
 
 ```{r eval=FALSE}
@@ -30,6 +30,8 @@ library(devtools)
 install_github("jknowles/maintainr")
 library(maintainr)
 ```
+
+## Backup Packages
 
 The first step is to get a csv file of installed packages (so it is human readable as well) with the function `save_pkgs()`. 
 
@@ -98,6 +100,10 @@ Sys.setenv("R_LIBS_SITE" = newLib)
 identical(Sys.getenv("R_LIBS_SITE"), newLib)
 
 ```
+
+## Backup R Configuration Files
+
+
 
 ### Links that help
 

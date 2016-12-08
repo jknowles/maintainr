@@ -13,8 +13,10 @@ Depends:
 Suggests:
     devtools,
     testthat,
-    covr
+    covr,
+    rdrop2
 Collate:
     'pkg_list.R'
     'write_profile.R'
+    'cloudUploaders.R'
 RoxygenNote: 5.0.1

@@ -31,15 +31,19 @@ readPkgs <- function(path, filename){
 ##' Read package names from a CSV file to an R object.
 ##'
 ##' @param mypkgs An R vector of package names, ideally read in from \code{\link{readPkgs}}
-##' @param newlib A path to a valid directory where R can install the packages
+##' @param libpath A path to a valid directory where R can install the packages
 ##' @param update A logical, should packages be updated first? Default is false
 ##' @export
-installPkgs <- function(mypkgs, newlib, update = FALSE){
+installPkgs <- function(mypkgs, libpath = NULL, update = FALSE){
   if(update){
     update.packages(ask=FALSE)
   }
   list <- unique(mypkgs[, 1])
-  install.packages(list, lib = newlib)
+  if(missing(libpath)){
+    message("No libpath specified, defaulting to first .libPaths() entry")
+    libpath <- .libPaths()[1]
+  }
+  install.packages(list, lib = libpath)
 }
 
 ##' Add a new library
