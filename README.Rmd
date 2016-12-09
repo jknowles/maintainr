@@ -33,7 +33,50 @@ library(maintainr)
 
 ## Backup Packages
 
-The first step is to get a csv file of installed packages (so it is human readable as well) with the function `save_pkgs()`. 
+Why would you want to backup packages? 
+
+```{r}
+myPkgs <- pkg_list()
+kable(head(myPkgs))
+```
+
+I want to keep this in sync across two machines:
+
+```{r results='hide', eval=FALSE}
+pkg_backup(cloudProvider = "dropbox", dest = "/zzz")
+
+```
+
+This stores a csv file in the specified location.
+
+Now let's sync/restore. 
+
+```{r}
+out <- pkg_restore(filename="zzz/RPackageBackup_2016-12-08.csv", 
+                   cloudProvider = "dropbox", install = FALSE)
+head(out)
+```
+
+Can install.
+
+```{r}
+# Sync
+row.names(old) <- NULL
+
+table(old == out)
+
+installList <- merge(old, out, by = c("Package", "LibPath"), all.y=TRUE)
+
+
+
+
+installPkgs
+```
+
+
+
+The first step is to get a csv file of installed packages (so it is human 
+readable as well) with the function `savePkgs()`. 
 
 ```{r eval=FALSE}
 # For example

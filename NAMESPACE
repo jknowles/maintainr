@@ -2,8 +2,10 @@
 
 export(installPkgs)
 export(pkg_backup)
+export(pkg_list)
 export(pkg_restore)
 export(readCloud)
 export(readPkgs)
 export(savePkgs)
+export(sync_pkgs)
 export(writeCloud)

@@ -25,7 +25,7 @@ pkg_backup <- function(backupPath = NULL, filename = NULL,
     message("List of R packages backed up successfully")
     message(paste0("Package list saved at ", paste(backupPath, filename, sep = "/")))
   } else{
-    writeCloud(filename = fullFN, provider = cloudProvider)
+    writeCloud(filename = fullFN, provider = cloudProvider, ...)
     message(paste0("List of R packages backed up to ", cloudProvider))
   }
 }
@@ -92,6 +92,6 @@ readCloud <- function(filename, provider = c("dropbox"), ...){
                         choices = c("dropbox"), several.ok = FALSE)
   if(provider == "dropbox"){
     requireNamespace("rdrop2", quietly = TRUE)
-    rdrop2::drop_read(file = filename, ...)
+    rdrop2::drop_read_csv(file = filename, ...)
   }
 }

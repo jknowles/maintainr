@@ -7,10 +7,44 @@
 ##' @param filename a name of a csv file to save the package list to
 ##' @export
 savePkgs <- function(path, filename){
-  pkgList <- library()$results
-  write.csv(pkgList[,1:2], file = paste0(path,"/", filename),
+  pkgList <- pkg_list()
+  write.csv(pkgList, file = paste0(path,"/", filename),
             row.names = FALSE)
 }
+
+#' Extract a list of installed packages and format it
+#'
+#' @return A data.frame with three columns, Package, LibPath, and Version
+#' @export
+#'
+#' @examples
+#' myPkgs <- pkg_list()
+#' head(myPkgs)
+pkg_list <- function(){
+  pkgList <- as.data.frame(installed.packages())
+  return(pkgList[, 1:3])
+}
+
+#' Check versions to install only newer packages
+#'
+#' @param pkgList A new list of packages 
+#' @param keep_all logical, should all packages in the new list that are not 
+#' installed on the system get synced up
+#'
+#' @return A list of packages to be installed that are not installed or out of date
+#' @export
+sync_pkgs <- function(pkgList, keep_all = TRUE){
+  if(!all(names(pkgList) %in% c("Package", "LibPath", "Version"))){
+    stop("Your package list must have columns Package, LibPath, Version")
+  }
+  old <- pkg_list()
+  installList <- merge(old, out, by = c("Package", "LibPath"), all.y = keep_all)
+  installList$flag <- installList$Version.x == installList$Version.y
+  installList <- installList[, c(1, 2, 3)]
+  names(installList) <- c("Package", "LibPath", "Version")
+  return(installList)
+}
+
 
 
 ##' Read Packages

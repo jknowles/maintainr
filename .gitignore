@@ -4,3 +4,4 @@
 *.Rproj
 setup.R
 tmp
+*.httr-oauth
