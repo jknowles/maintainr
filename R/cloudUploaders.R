@@ -39,12 +39,15 @@ pkg_backup <- function(backupPath = NULL, filename = NULL,
 #' @param cloudProvider Optional, if specified the package will attempt to write 
 #' the package list to a tempfile and then upload that tempfile to a cloud service
 #' @param libpath Path to the library
+#' @param update A logical, should packages be updated first? Default is false
+#' @param keep_all A logical, should all packages in pkgList not local be installed?
 #' @param ... Additional arguments to pass to \code{\link{readCloud}}
 #'
 #' @return Nothing.
 #' @export
 pkg_restore <- function(install = TRUE, backupPath = NULL, filename = NULL, 
-                        cloudProvider = NULL, libpath = NULL, ...){
+                        cloudProvider = NULL, libpath = NULL, update = FALSE, 
+                        keep_all = FALSE, ...){
   if(!missing(cloudProvider)){
     pkgList <- readCloud(filename = filename, provider = cloudProvider, ...)
   } else {
@@ -52,9 +55,16 @@ pkg_restore <- function(install = TRUE, backupPath = NULL, filename = NULL,
   }
   if(install){
     # First validate
-    installPkgs(pkgList, libpath = libpath, update = FALSE)
+    installPkgs(pkgList, libpath = libpath, update = update, 
+                keep_all = keep_all)
   } else{
-    return(pkgList)
+    pkgList <- sync_pkgs(pkgList = pkgList, keep_all = keep_all)
+    pkgList <- unique(pkgList[, 1])
+    if(length(pkgList) < 1){
+      message("All up to date.")
+    } else{
+      return(pkgList)
+    }
   }
 }
 

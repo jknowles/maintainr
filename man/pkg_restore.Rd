@@ -5,7 +5,8 @@
 \title{Restore R packages from a package list stored somewhere else}
 \usage{
 pkg_restore(install = TRUE, backupPath = NULL, filename = NULL,
-  cloudProvider = NULL, libpath = NULL, ...)
+  cloudProvider = NULL, libpath = NULL, update = FALSE,
+  keep_all = FALSE, ...)
 }
 \arguments{
 \item{install}{logical, should packages in the package list be installed?}
@@ -19,6 +20,10 @@ list of packages, optional}
 the package list to a tempfile and then upload that tempfile to a cloud service}
 
 \item{libpath}{Path to the library}
+
+\item{update}{A logical, should packages be updated first? Default is false}
+
+\item{keep_all}{A logical, should all packages in pkgList not local be installed?}
 
 \item{...}{Additional arguments to pass to \code{\link{readCloud}}}
 }

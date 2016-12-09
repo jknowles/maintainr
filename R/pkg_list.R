@@ -38,9 +38,13 @@ sync_pkgs <- function(pkgList, keep_all = TRUE){
     stop("Your package list must have columns Package, LibPath, Version")
   }
   old <- pkg_list()
-  installList <- merge(old, out, by = c("Package", "LibPath"), all.y = keep_all)
-  installList$flag <- installList$Version.x == installList$Version.y
-  installList <- installList[, c(1, 2, 3)]
+  installList <- merge(old, pkgList, by = c("Package", "LibPath"), 
+                       all.y = keep_all)
+  installList$flag <- installList$Version.x != installList$Version.y
+  installList <- installList[installList$flag, c(1, 2, 3)]
+  if(nrow(installList) < 1){
+    message("All local packages up to date with remote")
+  }
   names(installList) <- c("Package", "LibPath", "Version")
   return(installList)
 }
@@ -64,20 +68,28 @@ readPkgs <- function(path, filename){
 ##'
 ##' Read package names from a CSV file to an R object.
 ##'
-##' @param mypkgs An R vector of package names, ideally read in from \code{\link{readPkgs}}
+##' @param pkgList An R vector of package names, ideally read in from \code{\link{readPkgs}}
 ##' @param libpath A path to a valid directory where R can install the packages
 ##' @param update A logical, should packages be updated first? Default is false
+##' @param keep_all A logical, should all packages in pkgList not local be installed?
+##' @param ... additional arguments to pass to \code{\link{sync_pkgs}}
 ##' @export
-installPkgs <- function(mypkgs, libpath = NULL, update = FALSE){
+installPkgs <- function(pkgList, libpath = NULL, update = FALSE, keep_all = TRUE){
   if(update){
     update.packages(ask=FALSE)
   }
-  list <- unique(mypkgs[, 1])
+  pkgList <- sync_pkgs(pkgList = pkgList, keep_all = keep_all)
+  pkgList <- unique(pkgList[, 1])
   if(missing(libpath)){
     message("No libpath specified, defaulting to first .libPaths() entry")
     libpath <- .libPaths()[1]
   }
-  install.packages(list, lib = libpath)
+  if(length(pkgList) < 1){
+    message("All packages are up to date")
+  } else{
+    install.packages(pkgList, lib = libpath)
+  }
+  
 }
 
 ##' Add a new library

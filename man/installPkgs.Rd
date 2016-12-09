@@ -4,14 +4,18 @@
 \alias{installPkgs}
 \title{Restore Packages from a Backup}
 \usage{
-installPkgs(mypkgs, libpath = NULL, update = FALSE)
+installPkgs(pkgList, libpath = NULL, update = FALSE, keep_all = TRUE)
 }
 \arguments{
-\item{mypkgs}{An R vector of package names, ideally read in from \code{\link{readPkgs}}}
+\item{pkgList}{An R vector of package names, ideally read in from \code{\link{readPkgs}}}
 
 \item{libpath}{A path to a valid directory where R can install the packages}
 
 \item{update}{A logical, should packages be updated first? Default is false}
+
+\item{keep_all}{A logical, should all packages in pkgList not local be installed?}
+
+\item{...}{additional arguments to pass to \code{\link{sync_pkgs}}}
 }
 \description{
 Read package names from a CSV file to an R object.
