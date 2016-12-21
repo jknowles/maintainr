@@ -7,7 +7,7 @@
 pkg_backup(backupPath = NULL, filename = NULL, cloudProvider = NULL, ...)
 }
 \arguments{
-\item{backupPath}{The path to where \code{\link{savePkgs}} should write the
+\item{backupPath}{The path to where \code{\link{save_pkgs}} should write the
 list of packages, optional}
 
 \item{filename}{The name of the csv file to save the package names, optional}
@@ -15,7 +15,7 @@ list of packages, optional}
 \item{cloudProvider}{Optional, if specified the package will attempt to write
 the package list to a tempfile and then upload that tempfile to a cloud service}
 
-\item{...}{Additional arguments to pass to \code{\link{writeCloud}}}
+\item{...}{Additional arguments to pass to \code{\link{write_cloud}}}
 }
 \value{
 Nothing

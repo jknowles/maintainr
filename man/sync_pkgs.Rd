@@ -9,7 +9,7 @@ sync_pkgs(pkgList, keep_all = TRUE)
 \arguments{
 \item{pkgList}{A new list of packages}
 
-\item{keep_all}{logical, should all packages in the new list that are not 
+\item{keep_all}{logical, should all packages in the new list that are not
 installed on the system get synced up}
 }
 \value{

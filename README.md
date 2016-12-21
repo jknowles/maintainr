@@ -61,7 +61,7 @@ out <- pkg_restore(filename="zzz/RPackageBackup_2016-12-08.csv",
                    cloudProvider = "dropbox", install = FALSE)
 head(out)
 
-pkgList <- readCloud(filename="zzz/RPackageBackup_2016-12-08.csv", 
+pkgList <- read_cloud(filename="zzz/RPackageBackup_2016-12-08.csv", 
                    provider = "dropbox")
 
 sync_pkgs(pkgList = pkgList, keep_all = TRUE)
@@ -70,6 +70,18 @@ out <- pkg_restore(filename="zzz/RPackageBackup_2016-12-08.csv",
                    cloudProvider = "dropbox", install = FALSE)
 head(out)
 ```
+
+Functions
+---------
+
+-   `pkg_list`
+-   `pkg_backup`
+-   `save_pkgs`
+-   `read_pkgs`
+-   `install_pkgs`
+-   `sync_pkgs`
+-   `read_cloud`
+-   `write_cloud`
 
 Backup R Configuration Files
 ----------------------------

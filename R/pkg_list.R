@@ -6,7 +6,7 @@
 ##' of packages. Ideally to a remote backup solution.
 ##' @param filename a name of a csv file to save the package list to
 ##' @export
-savePkgs <- function(path, filename){
+save_pkgs <- function(path, filename){
   pkgList <- pkg_list()
   write.csv(pkgList, file = paste0(path,"/", filename),
             row.names = FALSE)
@@ -27,8 +27,8 @@ pkg_list <- function(){
 
 #' Check versions to install only newer packages
 #'
-#' @param pkgList A new list of packages 
-#' @param keep_all logical, should all packages in the new list that are not 
+#' @param pkgList A new list of packages
+#' @param keep_all logical, should all packages in the new list that are not
 #' installed on the system get synced up
 #'
 #' @return A list of packages to be installed that are not installed or out of date
@@ -38,7 +38,7 @@ sync_pkgs <- function(pkgList, keep_all = TRUE){
     stop("Your package list must have columns Package, LibPath, Version")
   }
   old <- pkg_list()
-  installList <- merge(old, pkgList, by = c("Package", "LibPath"), 
+  installList <- merge(old, pkgList, by = c("Package", "LibPath"),
                        all.y = keep_all)
   installList$flag <- installList$Version.x != installList$Version.y
   installList <- installList[installList$flag, c(1, 2, 3)]
@@ -59,7 +59,7 @@ sync_pkgs <- function(pkgList, keep_all = TRUE){
 ##' @param filename A string that denotes the filename where the packages are stored
 ##' of packages. Ideally to a remote backup solution.
 ##' @export
-readPkgs <- function(path, filename){
+read_pkgs <- function(path, filename){
     read.csv(file=paste0(path,"/", filename), stringsAsFactors=FALSE)
   # check formatting is correct
 }
@@ -68,13 +68,13 @@ readPkgs <- function(path, filename){
 ##'
 ##' Read package names from a CSV file to an R object.
 ##'
-##' @param pkgList An R vector of package names, ideally read in from \code{\link{readPkgs}}
+##' @param pkgList An R vector of package names, ideally read in from \code{\link{read_pkgs}}
 ##' @param libpath A path to a valid directory where R can install the packages
 ##' @param update A logical, should packages be updated first? Default is false
 ##' @param keep_all A logical, should all packages in pkgList not local be installed?
 ##' @param ... additional arguments to pass to \code{\link{sync_pkgs}}
 ##' @export
-installPkgs <- function(pkgList, libpath = NULL, update = FALSE, keep_all = TRUE){
+install_pkgs <- function(pkgList, libpath = NULL, update = FALSE, keep_all = TRUE){
   if(update){
     update.packages(ask=FALSE)
   }
@@ -89,7 +89,7 @@ installPkgs <- function(pkgList, libpath = NULL, update = FALSE, keep_all = TRUE
   } else{
     install.packages(pkgList, lib = libpath)
   }
-  
+
 }
 
 ##' Add a new library

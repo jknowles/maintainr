@@ -11,7 +11,7 @@ pkg_restore(install = TRUE, backupPath = NULL, filename = NULL,
 \arguments{
 \item{install}{logical, should packages in the package list be installed?}
 
-\item{backupPath}{The path to where \code{\link{savePkgs}} should write the
+\item{backupPath}{The path to where \code{\link{save_pkgs}} should write the
 list of packages, optional}
 
 \item{filename}{The name of the csv file to save the package names, optional}
@@ -25,7 +25,7 @@ the package list to a tempfile and then upload that tempfile to a cloud service}
 
 \item{keep_all}{A logical, should all packages in pkgList not local be installed?}
 
-\item{...}{Additional arguments to pass to \code{\link{readCloud}}}
+\item{...}{Additional arguments to pass to \code{\link{read_cloud}}}
 }
 \value{
 Nothing.
