@@ -22,7 +22,10 @@ save_pkgs <- function(path, filename){
 #' head(myPkgs)
 pkg_list <- function(){
   pkgList <- as.data.frame(installed.packages())
-  return(pkgList[, 1:3])
+  pkgList <- pkgList[, 1:3]
+  pkgList <- sapply(pkgList, as.character)
+  pkgList <- as.data.frame(pkgList)
+  return(pkgList)
 }
 
 #' Check versions to install only newer packages
