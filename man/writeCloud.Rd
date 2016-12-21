@@ -9,7 +9,7 @@ writeCloud(filename, provider = c("dropbox"), ...)
 \arguments{
 \item{filename}{path and filename of file to be uploaded to cloud storage}
 
-\item{provider}{a character for the provider to use, currently only "dropbox" 
+\item{provider}{a character for the provider to use, currently only "dropbox"
 is supported}
 
 \item{...}{additional arguments to pass to the function that uploads the file}
@@ -21,6 +21,6 @@ Nothing.
 Cloud upload handler
 }
 \seealso{
-\pkg{\link{rdrop2}}
+\code{\link[rdrop2:drop_read_csv]{drop_upload}}
 }
 

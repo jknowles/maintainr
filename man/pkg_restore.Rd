@@ -11,12 +11,12 @@ pkg_restore(install = TRUE, backupPath = NULL, filename = NULL,
 \arguments{
 \item{install}{logical, should packages in the package list be installed?}
 
-\item{backupPath}{The path to where \code{\link{savePkgs}} should write the 
+\item{backupPath}{The path to where \code{\link{savePkgs}} should write the
 list of packages, optional}
 
 \item{filename}{The name of the csv file to save the package names, optional}
 
-\item{cloudProvider}{Optional, if specified the package will attempt to write 
+\item{cloudProvider}{Optional, if specified the package will attempt to write
 the package list to a tempfile and then upload that tempfile to a cloud service}
 
 \item{libpath}{Path to the library}
