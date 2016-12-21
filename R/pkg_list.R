@@ -41,12 +41,10 @@ sync_pkgs <- function(pkgList, keep_all = TRUE){
     stop("Your package list must have columns Package, LibPath, Version")
   }
   old <- pkg_list()
-  installList <- merge(old, pkgList, by = c("Package", "LibPath"),
+  installList <- merge(old, pkgList, by = c("Package", "Version"),
                        all.y = keep_all)
-  installList$Version.x <- as.character(installList$Version.x)
-  installList$Version.y <- as.character(installList$Version.y)
-  installList$flag <- installList$Version.x != installList$Version.y
-  installList <- installList[installList$flag, c(1, 2, 3)]
+  installList$flag <- installList$LibPath.x != installList$LibPath.y
+  installList <- installList[installList$flag, c(1, 4, 2)]
   if(nrow(installList) < 1){
     message("All local packages up to date with remote")
   }
