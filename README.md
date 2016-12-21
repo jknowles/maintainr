@@ -1,12 +1,20 @@
 
 [![Travis-CI Build Status](https://travis-ci.org/jknowles/maintainr.svg?branch=master)](https://travis-ci.org/jknowles/maintainr)
 
-Introducing maintainr
-=====================
+maintainr
+=========
 
-Functions to synchronize package installation and libraries across multiple computers on multiple platforms. This workflow should also make upgrading R on Windows much more straightforward, and allow for the synchronization of packages among versions of R on the same machine or across machines.
+Stupid simple R package installation tracking.
 
-The basic workflow is simple, but the idea of the package is to create a way to allow lots of flexibility to users--such as composing and synchronizing an RProfile and Renviron file within R.
+Introduction
+------------
+
+`maintainr` is a simple package with a simple goal -- to produce an export of installed packages on an R installation and read in that export from another R installation. Currently, `maintainr` provides the ability to backup this list of installed packages and their version to a Dropbox account via the excellent `rdrop2` package.
+
+This package is not meant to be a way to standardize installs for production systems. Instead, it is to solve two specific problems I have with using R:
+
+1.  Upgrading my R installation seamlessly on Windows
+2.  Keeping track of installed packages across multiple machines used for analysis (work, home, virtual test environment)
 
 Installation
 ------------
@@ -22,14 +30,22 @@ library(maintainr)
 Backup Packages
 ---------------
 
-Why would you want to backup packages?
-
 ``` r
+library(maintainr)
 myPkgs <- pkg_list()
-kable(head(myPkgs))
+knitr::kable(head(myPkgs))
 ```
 
-I want to keep this in sync across two machines:
+|           | Package   | LibPath  | Version |
+|-----------|:----------|:---------|:--------|
+| abind     | abind     | C:/R/lib | 1.4-5   |
+| acepack   | acepack   | C:/R/lib | 1.4.1   |
+| ada       | ada       | C:/R/lib | 2.0-5   |
+| AER       | AER       | C:/R/lib | 1.2-4   |
+| Amelia    | Amelia    | C:/R/lib | 1.7.4   |
+| animation | animation | C:/R/lib | 2.4     |
+
+I want to keep this in sync across two machines so I store the list of installed packages to a central location.
 
 ``` r
 pkg_backup(cloudProvider = "dropbox", dest = "/zzz")
@@ -37,9 +53,10 @@ pkg_backup(cloudProvider = "dropbox", dest = "/zzz")
 
 This stores a csv file in the specified location.
 
-Now let's sync/restore.
+Now I can sync or restore.
 
 ``` r
+# Path for dropbox is from the root of the Dropbox directory
 out <- pkg_restore(filename="zzz/RPackageBackup_2016-12-08.csv", 
                    cloudProvider = "dropbox", install = FALSE)
 head(out)
@@ -54,64 +71,10 @@ out <- pkg_restore(filename="zzz/RPackageBackup_2016-12-08.csv",
 head(out)
 ```
 
-Can install.
-
-The first step is to get a csv file of installed packages (so it is human readable as well) with the function `savePkgs()`.
-
-``` r
-# For example
-PATH <- "Path/To/My/Dropbox"
-savePkgs(PATH, "mypkglist.csv")
-```
-
-After packages have been stored, then the user can restore the installed packages either to a new library (to create a sitewide library for example) or on a new machine, using the following workflow:
-
-    PATH <- "Path/to/My/Packagefile"
-
-    mypkgs <- readPkgs(PATH, "mypkglist.csv")
-
-    newlib <- "Path/to/new/pkg_library"
-
-    installPkgs(mypkgs,newlib)
-
-    addNewLib(newlib)
-
-Workflow
---------
-
-### Backup
-
-``` r
-# Backup
-
-# User defines:
-pkgBackupPath <- "/path/to/my/"
-newlib <- "C:/R/lib"
-
-savePkgs(pkgBackupPath, filename='backup.csv')
-
-pkgList <- read_pkgs(pkgBackupPath, filename='backup.csv')
-head(pkgList)
-
-installPkgs(pkgList, newLib)
-
-# Remove old libs
-addNewLib(newLib)
-
-Sys.setenv("R_LIBS_SITE" = newLib)
-identical(Sys.getenv("R_LIBS_SITE"), newLib)
-```
-
 Backup R Configuration Files
 ----------------------------
 
-After we have installed the packages into a new library, we need to tell R how to find that library. For now, the options to do this are quite limited. The best way is to borrow the code from [Tal Galili](http://stackoverflow.com/questions/1401904/painless-way-to-install-a-new-version-of-r-on-windows) to create a new .Renviron file. Currently this function only allows for a library that is in the parent of the R home directory, but will be updated soon to fix this:
-
-``` r
-setLibrary()
-```
-
-Once this is done, when R is restarted, the new library will be the default library. Cleaning out old libraries will need to be handled by a separate function yet to be written.
+Coming soon...
 
 To Do
 -----
@@ -121,9 +84,6 @@ To Do
 -   Sync R Profile Site
 -   Make Renviron point to library independently
 -   Make setting the R library path independent
--   Allow R to create the path specified if the file does not exist
--   Prompt user to confirm path creation
--   Update libraries
 -   Set R Profile Site configuration
 
 ### Links that help
