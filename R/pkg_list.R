@@ -24,7 +24,7 @@ pkg_list <- function(){
   pkgList <- as.data.frame(installed.packages())
   pkgList <- pkgList[, 1:3]
   pkgList <- sapply(pkgList, as.character)
-  pkgList <- as.data.frame(pkgList)
+  pkgList <- as.data.frame(pkgList, stringsAsFactors = FALSE)
   return(pkgList)
 }
 
