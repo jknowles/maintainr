@@ -40,6 +40,8 @@ sync_pkgs <- function(pkgList, keep_all = TRUE){
   old <- pkg_list()
   installList <- merge(old, pkgList, by = c("Package", "LibPath"),
                        all.y = keep_all)
+  installList$Version.x <- as.character(installList$Version.x)
+  installList$Version.y <- as.character(installList$Version.y)
   installList$flag <- installList$Version.x != installList$Version.y
   installList <- installList[installList$flag, c(1, 2, 3)]
   if(nrow(installList) < 1){
