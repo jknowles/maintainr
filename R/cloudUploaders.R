@@ -102,6 +102,6 @@ read_cloud <- function(filename, provider = c("dropbox"), ...){
                         choices = c("dropbox"), several.ok = FALSE)
   if(provider == "dropbox"){
     requireNamespace("rdrop2", quietly = TRUE)
-    rdrop2::drop_read_csv(file = filename, ...)
+    rdrop2::drop_read_csv(file = filename, stringsAsFactors = FALSE, ...)
   }
 }
