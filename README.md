@@ -1,4 +1,6 @@
 
+[![Travis-CI Build Status](https://travis-ci.org/jknowles/maintainr.svg?branch=master)](https://travis-ci.org/jknowles/maintainr)
+
 Introducing maintainr
 =====================
 
